@@ -3,6 +3,9 @@ package br.nom.marcio.belo;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -48,5 +51,34 @@ public class FuncionarioTest
     {
         Funcionario funcionario = new Voluntario("Leo", new BigDecimal("1000000"));
         assertEquals( new BigDecimal("0.00"), funcionario.getSalarioAnual());
+    }
+    
+    @Test
+    public void gerarFolhaDeGastosAnuaisTeste()
+    {
+    	Random random = new Random();
+    	BigDecimal folha = new BigDecimal(0);
+    	Integer acum = 0, salario;
+    	List <Funcionario> funcionarios = new LinkedList<Funcionario>();
+    	
+    	salario = random.nextInt(100000);
+    	Funcionario voluntario = new Voluntario("Leo", new BigDecimal(salario));
+    	funcionarios.add(voluntario);
+    	acum += salario;
+    	
+    	salario = random.nextInt(100000);
+    	Funcionario bonificado = new Bonificado("Ana", new BigDecimal(salario));
+    	funcionarios.add(bonificado);
+    	acum += salario;
+    	
+    	salario = random.nextInt(100000);
+    	Funcionario mensalista = new Mensalista("Marcio", new BigDecimal(salario));
+    	funcionarios.add(mensalista);
+    	acum += salario;
+    	
+    	for (Funcionario f : funcionarios)
+    		folha = folha.add(f.getSalarioAnual());
+    	
+    	assertTrue( new BigDecimal(acum).compareTo(folha) == 0);
     }
 }
