@@ -6,6 +6,7 @@ public class Bonificado extends Funcionario
 {
     public static final BigDecimal CINCO = new BigDecimal("5.00");
     private BigDecimal bonus = BigDecimal.ZERO;
+    
 
     protected Bonificado(String nome, BigDecimal salarioAnual) {
         super(nome, salarioAnual);
